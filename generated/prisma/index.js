@@ -132,7 +132,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/devdad/Olly/insert/generated/prisma",
+      "value": "/home/devdad/Olly/Insert/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -146,12 +146,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/devdad/Olly/insert/prisma/schema.prisma",
+    "sourceFilePath": "/home/devdad/Olly/Insert/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../prisma",
   "clientVersion": "6.19.1",
@@ -160,6 +159,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
