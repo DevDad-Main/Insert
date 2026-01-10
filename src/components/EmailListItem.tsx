@@ -19,107 +19,73 @@ export const EmailListItem = ({
   const formattedTime = formatDistanceToNow(email.timestamp, { addSuffix: true });
 
   return (
-    <div
+    <button
       onClick={onClick}
       className={cn(
-        'relative px-4 py-3 border-b border-border cursor-pointer transition-all group',
-        'hover:bg-muted',
-        isSelected && 'bg-muted border-l-2 border-l-primary scale-[1.01]',
-        isVisualSelected && 'bg-purple-900/20 border-l-2 border-l-purple-500',
-        !email.isRead && 'bg-accent/20'
+        'flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all relative',
+        'hover:bg-accent hover:text-accent-foreground',
+        isSelected && 'bg-muted text-foreground',
+        isVisualSelected && 'bg-purple-900/20 dark:bg-purple-900/30',
+        !email.isRead && 'font-medium'
       )}
     >
-      {/* Selection indicator for Vim visual mode */}
       {isSelected && (
-        <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-primary" />
+        <div className="absolute inset-0 dark:bg-white/20 bg-black/10 z-[-1] rounded-lg" />
       )}
 
-      <div className="flex items-start gap-3">
-        {/* Star indicator */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            // Handle star toggle
-          }}
-          className="mt-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-amber-500"
-        >
-          <Star
-            className={cn(
-              'w-4 h-4',
-              email.isStarred
-                ? 'fill-amber-500 text-amber-500'
-                : 'text-muted-foreground hover:text-amber-500'
-            )}
-          />
-        </button>
-
-        {/* Content */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2 mb-1">
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <span
-                  className={cn(
-                    'text-sm font-["Space_Grotesk"] truncate',
-                    !email.isRead
-                      ? 'text-foreground font-semibold'
-                      : 'text-muted-foreground'
-                  )}
-                >
-                  {email.from.name}
-                </span>
-                {!email.isRead && (
-                  <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
-                )}
-              </div>
-              <h3
-                className={cn(
-                  'text-sm truncate mt-0.5',
-                  !email.isRead
-                    ? 'text-foreground font-medium'
-                    : 'text-muted-foreground'
-                )}
-              >
-                {email.subject}
-              </h3>
+      <div className="flex flex-col w-full gap-1">
+        <div className="flex items-center">
+          <div className="flex items-center gap-2">
+            <div className="font-semibold">
+              {email.from.name}
             </div>
-            <span className="text-xs text-muted-foreground whitespace-nowrap flex-shrink-0">
-              {formattedTime.replace('about ', '')}
-            </span>
           </div>
-
-          <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
-            {email.preview}
-          </p>
-
-          {/* Metadata */}
-          <div className="flex items-center gap-3 text-xs">
-            {email.labels && email.labels.length > 0 && (
-              <div className="flex gap-1">
-                {email.labels.slice(0, 2).map((label) => (
-                  <span
-                    key={label}
-                    className="px-2 py-0.5 bg-muted text-primary rounded font-['Space_Grotesk']"
-                  >
-                    {label}
-                  </span>
-                ))}
-              </div>
+          <div
+            className={cn(
+              "ml-auto text-xs",
+              isSelected
+                ? "text-foreground"
+                : "text-muted-foreground"
             )}
-            {email.hasAttachments && (
-              <span className="flex items-center gap-1 text-muted-foreground">
-                <Paperclip className="w-3 h-3" />
-              </span>
-            )}
-            {email.threadCount && email.threadCount > 1 && (
-              <span className="flex items-center gap-1 text-muted-foreground">
-                <MessageSquare className="w-3 h-3" />
-                <span>{email.threadCount}</span>
-              </span>
-            )}
+          >
+            {formattedTime}
           </div>
         </div>
+        <div className="text-xs font-medium">{email.subject}</div>
+        <div className="text-xs line-clamp-2 text-muted-foreground">
+          {email.preview}
+        </div>
+
+        {/* Metadata */}
+        <div className="flex items-center gap-3 mt-1">
+          {email.labels && email.labels.length > 0 && (
+            <div className="flex gap-1">
+              {email.labels.slice(0, 2).map((label) => (
+                <span
+                  key={label}
+                  className="px-2 py-0.5 bg-primary/10 text-primary rounded text-[10px]"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+          )}
+          {email.hasAttachments && (
+            <span className="flex items-center gap-1 text-muted-foreground text-xs">
+              <Paperclip className="w-3 h-3" />
+            </span>
+          )}
+          {email.threadCount && email.threadCount > 1 && (
+            <span className="flex items-center gap-1 text-muted-foreground text-xs">
+              <MessageSquare className="w-3 h-3" />
+              <span>{email.threadCount}</span>
+            </span>
+          )}
+          {email.isStarred && (
+            <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
+          )}
+        </div>
       </div>
-    </div>
+    </button>
   );
 };

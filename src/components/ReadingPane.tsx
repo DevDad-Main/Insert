@@ -13,7 +13,6 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
-import { AIAssistant } from './AIAssistant';
 
 interface ReadingPaneProps {
   email: Email | null;
@@ -21,8 +20,6 @@ interface ReadingPaneProps {
   onArchive: () => void;
   onDelete: () => void;
   onToggleStar: () => void;
-  showAI?: boolean;
-  onToggleAI?: () => void;
 }
 
 export const ReadingPane = ({
@@ -31,8 +28,6 @@ export const ReadingPane = ({
   onArchive,
   onDelete,
   onToggleStar,
-  showAI = true,
-  onToggleAI,
 }: ReadingPaneProps) => {
   
   if (!email) {
@@ -195,15 +190,6 @@ export const ReadingPane = ({
       {/* Email Body */}
       <ScrollArea className="flex-1 scan-lines">
         <div className="px-6 py-6 max-w-4xl space-y-6">
-          {/* AI Assistant */}
-          {showAI && (
-            <AIAssistant
-              emailBody={email.body}
-              emailSubject={email.subject}
-              onClose={onToggleAI}
-            />
-          )}
-
           <div className="prose prose-invert prose-sm max-w-none">
             <div className="text-foreground leading-relaxed whitespace-pre-wrap font-['IBM_Plex_Mono']">
               {email.body}
