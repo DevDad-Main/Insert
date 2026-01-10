@@ -1,0 +1,143 @@
+@import '@fontsource/jetbrains-mono/700.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/space-grotesk/500.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Terminal-inspired dark theme */
+    --background: 210 20% 5%;
+    --foreground: 0 0% 90%;
+
+    --card: 210 20% 7%;
+    --card-foreground: 0 0% 90%;
+
+    --popover: 210 20% 6%;
+    --popover-foreground: 0 0% 90%;
+
+    --primary: 190 100% 50%;
+    --primary-foreground: 210 20% 5%;
+
+    --secondary: 210 15% 15%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 210 15% 12%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 190 100% 50%;
+    --accent-foreground: 210 20% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 90%;
+
+    --border: 210 15% 18%;
+    --input: 210 15% 15%;
+    --ring: 190 100% 50%;
+
+    --radius: 0.25rem;
+
+    /* Vim colors */
+    --vim-normal: 190 100% 50%;
+    --vim-insert: 142 76% 36%;
+    --vim-visual: 271 76% 53%;
+    --vim-amber: 38 92% 50%;
+  }
+
+  .light {
+    /* Light theme */
+    --background: 0 0% 100%;
+    --foreground: 210 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 20% 15%;
+
+    --primary: 190 100% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 15% 96%;
+    --secondary-foreground: 210 20% 15%;
+
+    --muted: 210 15% 94%;
+    --muted-foreground: 220 8% 40%;
+
+    --accent: 190 100% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 15% 88%;
+    --input: 210 15% 92%;
+    --ring: 190 100% 45%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+  }
+
+  button, .ui-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+  }
+}
+
+/* Scan-line effect */
+@layer utilities {
+  .scan-lines {
+    position: relative;
+  }
+  
+  .scan-lines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  .terminal-glow {
+    box-shadow: 0 0 60px rgba(0, 217, 255, 0.15);
+  }
+
+  .text-neon-cyan {
+    color: rgb(0, 217, 255);
+  }
+
+  .text-amber {
+    color: rgb(255, 180, 84);
+  }
+
+  .bg-terminal {
+    background-color: rgb(10, 14, 20);
+  }
+
+  .border-neon-cyan {
+    border-color: rgb(0, 217, 255);
+  }
+}
